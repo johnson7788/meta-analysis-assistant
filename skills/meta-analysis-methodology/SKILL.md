@@ -1,203 +1,198 @@
 ---
 name: meta-analysis-methodology
 description: |
-  This skill should be used when the user discusses meta-analysis methodology, PRISMA guidelines,
-  risk of bias assessment, heterogeneity interpretation, effect size selection, evidence grading,
-  or any systematic review methodological question. Provides authoritative reference knowledge
-  for meta-analysis best practices.
+  当用户讨论 Meta 分析方法学、PRISMA 指南、偏倚风险评估、异质性解读、效应量选择、证据分级，
+  或任何系统评价方法学问题时，应使用此 Skill。为 Meta 分析最佳实践提供权威参考知识。
 version: 1.0.0
 ---
 
-# Meta-Analysis Methodology Knowledge Base
+# Meta 分析方法学知识库
 
-This skill provides authoritative reference knowledge for conducting rigorous meta-analyses and
-systematic reviews. It covers effect measure selection, statistical model choice, heterogeneity
-assessment, reporting standards, risk of bias evaluation, and evidence grading. Use this skill
-to ensure methodological decisions align with current best practices and established guidelines.
+此 Skill 为开展严谨的 Meta 分析和系统评价提供权威参考知识。涵盖效应量选择、统计模型选择、异质性评估、报告标准、偏倚风险评估和证据分级。使用此 Skill 确保方法学决策符合当前最佳实践和既定指南。
 
-## When This Skill Applies
+## 适用场景
 
-- Choosing effect measures (OR vs RR vs MD vs SMD)
-- Fixed-effect vs random-effects models
-- Interpreting heterogeneity (I², tau², Q)
-- PRISMA 2020 reporting requirements
-- Risk of bias tools (RoB 2, NOS, QUADAS-2)
-- GRADE framework for certainty of evidence
-- Special situations (zero events, few studies, missing data)
+- 选择效应量（OR vs RR vs MD vs SMD）
+- 固定效应 vs 随机效应模型
+- 解读异质性（I²、tau²、Q）
+- PRISMA 2020 报告要求
+- 偏倚风险工具（RoB 2、NOS、QUADAS-2）
+- GRADE 证据确定性评价框架
+- 特殊情况（零事件、研究数少、缺失数据）
 
-## Quick Decision Guides
+## 快速决策指南
 
-### Effect Measure Selection
+### 效应量选择
 
-| Data Type | Recommended Measure | When to Use |
-|---|---|---|
-| Binary outcomes | RR (Risk Ratio) | Default for binary data; intuitive interpretation; preferred when baseline risk varies |
-| Binary outcomes (case-control) | OR (Odds Ratio) | Case-control studies; rare outcomes where OR approximates RR; logistic regression outputs |
-| Continuous (same scale) | MD (Mean Difference) | All studies use the same measurement instrument and units |
-| Continuous (different scales) | SMD (Standardized Mean Difference) | Studies use different instruments measuring the same construct (e.g., different depression scales) |
-| Time-to-event | HR (Hazard Ratio) | Survival data with censoring; accounts for varying follow-up durations |
-| Correlation | Fisher's z | Transform r to Fisher's z for analysis; back-transform for reporting |
+| 数据类型 | 推荐效应量 | 适用场景 |
+|---------|-----------|---------|
+| 二分类结局 | RR（风险比） | 二分类数据的默认选择；解读直观；基线风险不同时优先使用 |
+| 二分类结局（病例对照） | OR（比值比） | 病例对照研究；罕见结局时 OR 近似 RR；逻辑回归输出 |
+| 连续性（相同量表） | MD（均值差） | 所有研究使用相同测量工具和单位 |
+| 连续性（不同量表） | SMD（标准化均值差） | 研究使用不同工具测量相同构念（如不同的抑郁量表） |
+| 时间-事件 | HR（风险比） | 有删失的生存数据；适用于不同随访时长 |
+| 相关性 | Fisher's z | 分析时将 r 转换为 Fisher's z；报告时反变换 |
 
-**Key considerations:**
+**关键考虑：**
 
-- RR is generally preferred over OR for randomized trials because it is more interpretable.
-- OR overestimates the effect when the outcome is common (>10%).
-- SMD (Hedges' g) includes a small-sample correction and is preferred over Cohen's d.
-- Always report effect measures with 95% confidence intervals.
+- 对于随机试验，RR 通常优于 OR，因为更易解读。
+- 当结局常见（>10%）时，OR 会高估效应。
+- SMD（Hedges' g）包含小样本校正，优于 Cohen's d。
+- 始终报告效应量及 95% 置信区间。
 
-### Model Selection
+### 模型选择
 
-| Scenario | Recommended Model | Rationale |
-|---|---|---|
-| Studies are clinically and methodologically similar | Fixed-effect (Mantel-Haenszel) | Assumes one true effect size; weights by inverse variance |
-| Studies differ in populations, interventions, or settings | Random-effects (REML + Knapp-Hartung) | Accounts for between-study variance (tau²); wider, more conservative CIs |
-| Few studies (k < 5) | Fixed-effect with caution | Random-effects tau² estimate is imprecise with few studies; interpret with caution |
-| Very rare events (<1% incidence) | Peto method | Best performance for rare events; avoids zero-cell corrections |
-| Rare events with balanced groups | Mantel-Haenszel (no correction) | Performs well without continuity corrections when groups are balanced |
+| 场景 | 推荐模型 | 理由 |
+|------|---------|------|
+| 研究在临床和方法学上相似 | 固定效应（Mantel-Haenszel） | 假设一个真实效应量；按逆方差加权 |
+| 研究在人群、干预或场所方面不同 | 随机效应（REML + Knapp-Hartung） | 考虑研究间方差（tau²）；更宽、更保守的 CI |
+| 研究数少（k < 5） | 固定效应（谨慎使用） | 少量研究时随机效应的 tau² 估计不精确；需谨慎解读 |
+| 极罕见事件（<1% 发生率） | Peto 法 | 罕见事件表现最佳；避免零单元格校正 |
+| 组间均衡的罕见事件 | Mantel-Haenszel（不校正） | 组间均衡时无需连续性校正表现良好 |
 
-**Key considerations:**
+**关键考虑：**
 
-- The Knapp-Hartung adjustment is recommended over the standard DerSimonian-Laird method for random-effects models because it provides more accurate confidence intervals, especially when the number of studies is small.
-- REML (Restricted Maximum Likelihood) is the preferred estimator for tau² in most situations.
-- A fixed-effect model does not assume homogeneity; it estimates the weighted average effect but does not generalize beyond the included studies.
-- When k < 5, consider presenting individual study results alongside any pooled estimate.
+- 推荐 Knapp-Hartung 调整优于标准 DerSimonian-Laird 方法，因为它提供更准确的置信区间，特别是研究数量较少时。
+- REML（限制性最大似然法）是大多数情况下 tau² 的首选估计方法。
+- 固定效应模型并不假设同质性；它估计加权平均效应，但不能推广到纳入研究之外。
+- 当 k < 5 时，考虑在合并估计值旁展示各研究的结果。
 
-### Heterogeneity Interpretation
+### 异质性解读
 
-| I² Range | Interpretation | Recommended Action |
-|---|---|---|
-| 0-40% | Might not be important | Report I² and Q-test p-value; proceed with pooled estimate |
-| 30-60% | Moderate heterogeneity | Explore sources with subgroup analysis or meta-regression; check for clinical diversity |
-| 50-90% | Substantial heterogeneity | Investigate causes before pooling; present subgroup results; consider whether pooling is appropriate |
-| 75-100% | Considerable heterogeneity | Strong justification needed to pool; focus on exploring sources of heterogeneity; narrative synthesis may be more appropriate |
+| I² 范围 | 解读 | 建议操作 |
+|---------|------|---------|
+| 0-40% | 可能不重要 | 报告 I² 和 Q 检验 p 值；继续合并估计 |
+| 30-60% | 中度异质性 | 通过亚组分析或 Meta 回归探索来源；检查临床多样性 |
+| 50-90% | 实质性异质性 | 合并前调查原因；展示亚组结果；考虑合并是否合适 |
+| 75-100% | 相当大的异质性 | 合并需要充分理由；重点探索异质性来源；叙述性综合可能更合适 |
 
-**Key considerations:**
+**关键考虑：**
 
-- I² describes the percentage of variability due to heterogeneity rather than sampling error, but it does not indicate the magnitude of the between-study variance.
-- Always report tau² (absolute between-study variance) alongside I² for a complete picture.
-- The Q-test (Cochran's Q) has low power when few studies are included; a non-significant Q does not confirm homogeneity.
-- Prediction intervals show the range within which the true effect of a future study is expected to fall and should be reported alongside confidence intervals in random-effects meta-analyses.
-- Overlap in I² ranges is intentional; interpretation depends on the clinical context and the magnitude of effects.
+- I² 描述因异质性而非抽样误差导致的变异百分比，但不表示研究间方差的大小。
+- 始终同时报告 tau²（绝对研究间方差）和 I²，以提供完整的图景。
+- Q 检验（Cochran's Q）在研究数少时统计效能低；Q 不显著不等于同质。
+- 预测区间显示未来研究真实效应预期所在的范围，在随机效应 Meta 分析中应与置信区间一同报告。
+- I² 范围的重叠是有意的；解读取决于临床背景和效应大小。
 
-## PRISMA 2020 Reporting Checklist (Key Items)
+## PRISMA 2020 报告 Checklist（关键条目）
 
-The PRISMA 2020 statement (Page et al., BMJ 2021) includes 27 checklist items. The most critical items for meta-analysis reporting are:
+PRISMA 2020 声明（Page 等，BMJ 2021）包含 27 项 checklist 条目。Meta 分析报告最关键的条目：
 
-1. **Title (Item 1):** Identify the report as a systematic review with or without meta-analysis.
-2. **Eligibility criteria (Item 6):** Specify inclusion/exclusion criteria with PICO components.
-3. **Information sources (Item 7):** List all databases, registers, and other sources searched.
-4. **Search strategy (Item 8):** Present full search strategy for at least one database.
-5. **Study selection (Item 9):** State the process for selecting studies (screening, eligibility, inclusion).
-6. **Synthesis methods (Item 13):** Describe the meta-analytic methods: effect measure, model, software, handling of heterogeneity.
-7. **Risk of bias (Item 11-12):** Specify the tool used and how results were incorporated.
-8. **Results of syntheses (Item 20):** Present forest plots with CIs, measures of heterogeneity.
-9. **Reporting biases (Item 21):** Present assessments of publication bias (funnel plot, Egger's test).
-10. **Certainty of evidence (Item 22):** Present GRADE or equivalent assessment for each outcome.
+1. **标题（条目 1）：** 将报告标识为有或无 Meta 分析的系统评价。
+2. **纳入标准（条目 6）：** 以 PICO 要素明确纳入/排除标准。
+3. **信息来源（条目 7）：** 列出所有检索的数据库、注册库和其他来源。
+4. **检索策略（条目 8）：** 至少提供一个数据库的完整检索策略。
+5. **研究选择（条目 9）：** 说明研究选择过程（筛选、合格性评估、纳入）。
+6. **合成方法（条目 13）：** 描述 Meta 分析方法：效应量、模型、软件、异质性处理。
+7. **偏倚风险（条目 11-12）：** 说明使用的工具及结果如何纳入分析。
+8. **合成结果（条目 20）：** 展示森林图（含 CI）、异质性指标。
+9. **报告偏倚（条目 21）：** 展示发表偏倚评估（漏斗图、Egger 检验）。
+10. **证据确定性（条目 22）：** 展示每个结局的 GRADE 或等效评估。
 
-Always include the PRISMA flow diagram showing study identification, screening, eligibility, and inclusion counts.
+始终包含 PRISMA 流程图，显示研究识别、筛选、合格性评估和纳入的计数。
 
-## Risk of Bias Assessment Tools
+## 偏倚风险评估工具
 
-### RoB 2 (Revised Cochrane Risk of Bias Tool for Randomized Trials)
+### RoB 2（Cochrane 随机试验偏倚风险修订工具）
 
-Domains assessed:
-1. Randomization process
-2. Deviations from intended interventions
-3. Missing outcome data
-4. Measurement of the outcome
-5. Selection of the reported result
+评估的域：
+1. 随机化过程
+2. 偏离预期干预
+3. 缺失结局数据
+4. 结局测量
+5. 报告结果的选择
 
-Each domain is judged as: Low risk / Some concerns / High risk.
-Overall judgment follows the worst domain rating.
+每个域判断为：低风险 / 存在一些关切 / 高风险。
+总体判断遵循最差域的评级。
 
-### Newcastle-Ottawa Scale (NOS) for Observational Studies
+### Newcastle-Ottawa 量表（NOS）— 观察性研究
 
-Three categories (maximum 9 stars):
-- **Selection** (4 stars): Representativeness, selection of non-exposed, ascertainment of exposure, outcome not present at start
-- **Comparability** (2 stars): Comparability based on design or analysis (confounding adjustment)
-- **Outcome** (3 stars): Assessment of outcome, follow-up length, adequacy of follow-up
+三个类别（最高 9 星）：
+- **选择**（4 星）：代表性、非暴露组选择、暴露确认、起始时结局未出现
+- **可比性**（2 星）：基于设计或分析的可比性（混杂调整）
+- **结局**（3 星）：结局评估、随访时长、随访充分性
 
-Thresholds (commonly used): 7-9 = good quality, 4-6 = fair quality, 0-3 = poor quality.
+常用阈值：7-9 = 高质量，4-6 = 中等质量，0-3 = 低质量。
 
-### QUADAS-2 (Quality Assessment of Diagnostic Accuracy Studies)
+### QUADAS-2（诊断准确性研究质量评估）
 
-Four domains:
-1. Patient selection
-2. Index test
-3. Reference standard
-4. Flow and timing
+四个域：
+1. 患者选择
+2. 待评价试验
+3. 参考标准
+4. 流程和时间
 
-Each domain is assessed for risk of bias; the first three are also assessed for applicability concerns.
+每个域评估偏倚风险；前三个还评估适用性关切。
 
-## GRADE Framework for Certainty of Evidence
+## GRADE 证据确定性评价框架
 
-GRADE (Grading of Recommendations, Assessment, Development, and Evaluations) rates the certainty of evidence for each outcome across studies.
+GRADE（推荐评估、制定与评价分级）对每个结局跨研究评定证据确定性。
 
-### Starting Rating
+### 起始评级
 
-- Randomized trials start at **High**.
-- Observational studies start at **Low**.
+- 随机试验起始为**高**。
+- 观察性研究起始为**低**。
 
-### Factors That Lower Certainty (one or two levels each)
+### 降级因素（每项可降一或两级）
 
-| Factor | Common Reasons to Downgrade |
-|---|---|
-| Risk of bias | Serious limitations in study design or execution |
-| Inconsistency | Unexplained heterogeneity (high I², non-overlapping CIs, different directions of effect) |
-| Indirectness | Differences in population, intervention, comparator, or outcome from the review question |
-| Imprecision | Wide confidence intervals crossing clinically important thresholds; small sample/few events (OIS not met) |
-| Publication bias | Asymmetric funnel plot, significant Egger's test, or evidence of missing studies |
+| 因素 | 常见降级原因 |
+|------|------------|
+| 偏倚风险 | 研究设计或执行中的严重缺陷 |
+| 不一致性 | 无法解释的异质性（高 I²、CI 不重叠、效应方向不同） |
+| 间接性 | 人群、干预、对照或结局与评价问题存在差异 |
+| 不精确性 | 置信区间宽，跨越临床重要阈值；样本量小/事件少（未达最优信息量） |
+| 发表偏倚 | 漏斗图不对称、Egger 检验显著，或有缺失研究证据 |
 
-### Factors That Raise Certainty (observational studies only)
+### 升级因素（仅观察性研究）
 
-| Factor | Description |
-|---|---|
-| Large magnitude of effect | RR > 2 or RR < 0.5 with no plausible confounders (upgrade one level); RR > 5 or RR < 0.2 (upgrade two levels) |
-| Dose-response gradient | Clear dose-response relationship increases confidence |
-| Residual confounding | All plausible confounders would reduce the observed effect, strengthening confidence |
+| 因素 | 描述 |
+|------|------|
+| 大效应量 | RR > 2 或 RR < 0.5 且无合理混杂因素（升一级）；RR > 5 或 RR < 0.2（升两级） |
+| 剂量-反应关系 | 明确的剂量-反应关系增加信心 |
+| 残余混杂 | 所有合理的混杂因素都会减弱观察到的效应，从而增强信心 |
 
-### Final Certainty Ratings
+### 最终确定性评级
 
-| Rating | Definition |
-|---|---|
-| High | Very confident the true effect lies close to the estimate |
-| Moderate | Moderately confident; the true effect is likely close but may be substantially different |
-| Low | Limited confidence; the true effect may be substantially different from the estimate |
-| Very Low | Very little confidence; the true effect is likely substantially different from the estimate |
+| 评级 | 定义 |
+|------|------|
+| 高 | 非常有信心真实效应接近估计值 |
+| 中 | 中等信心；真实效应可能接近但也可能有实质性差异 |
+| 低 | 信心有限；真实效应可能与估计值有实质性差异 |
+| 极低 | 信心极低；真实效应很可能与估计值有实质性差异 |
 
-## Special Situations
+## 特殊情况
 
-### Zero Events
+### 零事件
 
-- Do not use a 0.5 continuity correction by default; it can introduce bias.
-- Peto odds ratio performs well for rare events with balanced groups and no substantial heterogeneity in effect sizes.
-- Mantel-Haenszel method without continuity correction is recommended when at least one arm has events.
-- For double-zero studies (no events in either arm), these are typically excluded from the standard meta-analysis but should be reported and discussed.
-- Consider beta-binomial models or exact methods for very rare events.
+- 默认不使用 0.5 连续性校正；它可能引入偏倚。
+- 当组间均衡且效应量异质性不大时，Peto 比值比表现良好。
+- 推荐使用不加连续性校正的 Mantel-Haenszel 法，前提是至少一组有事件。
+- 双零研究（两组均无事件）通常从标准 Meta 分析中排除，但应报告并讨论。
+- 极罕见事件考虑使用 beta-二项模型或精确方法。
 
-### Few Studies (k < 5)
+### 研究数少（k < 5）
 
-- Random-effects estimates of tau² are unreliable with fewer than five studies.
-- The Knapp-Hartung adjustment is still recommended but confidence intervals may be very wide.
-- Present individual study results prominently.
-- Be transparent about the limitations of pooling few studies.
-- Consider sensitivity analyses to evaluate the robustness of findings.
+- 少于五项研究时，随机效应 tau² 估计不可靠。
+- 仍推荐 Knapp-Hartung 调整，但置信区间可能非常宽。
+- 突出展示各研究结果。
+- 对合并少量研究的局限性保持透明。
+- 考虑进行敏感性分析以评估结果稳健性。
 
-### Missing Data
+### 缺失数据
 
-- Contact original study authors when feasible.
-- Use available-case analysis as the primary approach.
-- Conduct sensitivity analyses assuming best-case and worst-case scenarios for missing data.
-- Multiple imputation may be appropriate when the missing data mechanism is understood.
-- Report the extent and pattern of missing data across studies.
+- 可行时联系原始研究作者。
+- 使用可用病例分析作为主要方法。
+- 对缺失数据进行最佳情况和最坏情况假设的敏感性分析。
+- 当缺失数据机制明确时，可使用多重插补。
+- 报告各研究缺失数据的范围和模式。
 
-## Reference Materials
+## 参考材料
 
-The following reference files in the `references/` directory provide detailed guidance on specific topics:
+以下 `references/` 目录中的参考文件提供特定主题的详细指导：
 
-1. **`effect-size-formulas.md`** -- Formulas and derivations for all common effect size measures (OR, RR, RD, MD, SMD, HR, Fisher's z) including variance estimators and transformations.
-2. **`heterogeneity-diagnostics.md`** -- Detailed guidance on computing and interpreting I², tau², Q-statistic, H², and prediction intervals, with decision rules for subgroup and sensitivity analyses.
-3. **`prisma-2020-checklist.md`** -- Complete PRISMA 2020 27-item checklist with explanations and examples for each item, adapted for meta-analysis reporting.
-4. **`risk-of-bias-guides.md`** -- Step-by-step instructions for applying RoB 2, NOS, and QUADAS-2, including signaling questions and worked domain-level judgment examples.
-5. **`grade-evidence-tables.md`** -- Templates and worked examples for constructing GRADE Summary of Findings tables, with guidance on rating each domain and documenting judgments.
-6. **`publication-bias-methods.md`** -- Methods for assessing and addressing publication bias including funnel plots, Egger's regression, trim-and-fill, selection models (Vevea-Hedges), and p-curve analysis.
+1. **`statistical-methods.md`** — 所有常用效应量的公式和推导（OR、RR、RD、MD、SMD、HR、Fisher's z），包括方差估计量和变换方法；合并方法（固定效应/随机效应）；异质性计算和解读；发表偏倚方法；特殊情况处理。
+2. **`cochrane-handbook.md`** — Cochrane 系统评价手册核心方法学和最佳实践。
+3. **`prisma-2020.md`** — PRISMA 2020 完整 27 项 checklist 和流程图模板。
+4. **`rob2-tool.md`** — RoB 2 偏倚风险评估工具的信号问题和逐域判断指南。
+5. **`nos-scale.md`** — Newcastle-Ottawa 量表的评分标准和使用指南。
+6. **`grade-framework.md`** — GRADE 证据汇总表模板和评级指南。

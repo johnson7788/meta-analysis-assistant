@@ -6,7 +6,7 @@ allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch]
 
 # Meta 分析写作助手
 
-User invoked with: $ARGUMENTS
+用户调用参数为：$ARGUMENTS
 
 ---
 
@@ -14,7 +14,7 @@ User invoked with: $ARGUMENTS
 
 ### 无参数：完整流程引导
 
-If `$ARGUMENTS` is empty, perform the following:
+如果 `$ARGUMENTS` 为空，执行以下操作：
 
 1. **检查当前工作目录中的已有文件**，判断项目进度：
    - `protocol.md` — 研究方案
@@ -24,36 +24,36 @@ If `$ARGUMENTS` is empty, perform the following:
    - `statistical-results.md` — 统计分析结果
    - `manuscript.md` — 论文手稿
 
-   Use Glob to scan the working directory for these files. Present the user with a summary of which stages have been completed and which remain.
+   使用 Glob 扫描工作目录中的这些文件。向用户展示各阶段完成情况的摘要。
 
-2. **询问用户**：是从头开始 (start from beginning)，还是从某个特定阶段继续 (continue from a specific stage)。
+2. **询问用户**：是从头开始，还是从某个特定阶段继续。
 
 3. **按顺序引导用户完成以下 6 个阶段**，每个阶段完成后确认用户满意再进入下一阶段：
 
 | 阶段 | 名称 | 触发的 Agent | 主要输出文件 |
 |------|------|-------------|-------------|
-| Stage 1 | 研究方案 (Protocol Design) | `protocol-designer` | `protocol.md` |
-| Stage 2 | 检索策略 (Search Strategy) | `search-strategist` | `search-strategy.md` |
-| Stage 3 | 文献筛选 (Study Screening) | `study-screener` | `screening-log.md` |
-| Stage 4 | 数据提取 (Data Extraction) | `data-extractor` | `data-extraction.md` |
-| Stage 5 | 统计分析 (Statistical Analysis) | `statistician` | `statistical-results.md` |
-| Stage 6 | 论文撰写 (Manuscript Writing) | `manuscript-writer` | `manuscript.md` |
+| Stage 1 | 研究方案 | `protocol-designer` | `protocol.md` |
+| Stage 2 | 检索策略 | `search-strategist` | `search-strategy.md` |
+| Stage 3 | 文献筛选 | `study-screener` | `screening-log.md` |
+| Stage 4 | 数据提取 | `data-extractor` | `data-extraction.md` |
+| Stage 5 | 统计分析 | `statistician` | `statistical-results.md` |
+| Stage 6 | 论文撰写 | `manuscript-writer` | `manuscript.md` |
 
-For each stage:
-- Briefly explain what the stage accomplishes and what inputs are needed.
-- Trigger the corresponding agent to carry out the work.
-- When the agent completes, present the output to the user for review.
-- Ask: "对本阶段的结果满意吗？可以进入下一阶段，或者修改当前结果。"
-- Only proceed to the next stage after explicit user confirmation.
+每个阶段：
+- 简要说明该阶段完成的任务和所需输入。
+- 触发对应的 Agent 执行工作。
+- Agent 完成后，将输出展示给用户审阅。
+- 询问："对本阶段的结果满意吗？可以进入下一阶段，或者修改当前结果。"
+- 仅在用户明确确认后才进入下一阶段。
 
 ---
 
 ### 带参数：跳转到指定阶段
 
-If `$ARGUMENTS` is not empty, map the argument to the corresponding agent:
+如果 `$ARGUMENTS` 不为空，将参数映射到对应的 Agent：
 
-| 参数 (Argument) | 目标 Agent | 说明 |
-|-----------------|-----------|------|
+| 参数 | 目标 Agent | 说明 |
+|------|-----------|------|
 | `protocol` | `protocol-designer` | 跳转到研究方案设计阶段 |
 | `search` | `search-strategist` | 跳转到检索策略制定阶段 |
 | `screen` | `study-screener` | 跳转到文献筛选阶段 |
@@ -61,19 +61,19 @@ If `$ARGUMENTS` is not empty, map the argument to the corresponding agent:
 | `stats` | `statistician` | 跳转到统计分析阶段 |
 | `write` | `manuscript-writer` | 跳转到论文撰写阶段 |
 
-**前置依赖检查：** Before executing the requested stage, verify that prerequisite files from earlier stages exist. The dependency chain is:
+**前置依赖检查：** 在执行请求的阶段之前，验证前序阶段的必需文件是否存在。依赖链如下：
 
-- `search` requires: `protocol.md`
-- `screen` requires: `protocol.md`, `search-strategy.md`
-- `extract` requires: `protocol.md`, `search-strategy.md`, `screening-log.md`
-- `stats` requires: `data-extraction.md`
-- `write` requires: `protocol.md`, `statistical-results.md`
+- `search` 需要：`protocol.md`
+- `screen` 需要：`protocol.md`、`search-strategy.md`
+- `extract` 需要：`protocol.md`、`search-strategy.md`、`screening-log.md`
+- `stats` 需要：`data-extraction.md`
+- `write` 需要：`protocol.md`、`statistical-results.md`
 
-If any prerequisite file is missing, **warn the user** clearly:
+如果任何前置文件缺失，**明确警告用户**：
 
-> ⚠️ 缺少前置文件：`<missing-file>` 尚未生成。建议先完成对应阶段，或提供已有数据文件后再继续。
+> ⚠️ 缺少前置文件：`<缺失文件>` 尚未生成。建议先完成对应阶段，或提供已有数据文件后再继续。
 
-Then ask whether the user wants to:
+然后询问用户是否要：
 1. 先完成缺失的前置阶段
 2. 跳过检查，强制继续（可能导致输出质量下降）
 
