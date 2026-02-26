@@ -48,7 +48,7 @@ Before writing any section of the manuscript, you MUST read ALL previous pipelin
 5. `data-extraction.md` — extracted data from included studies (study characteristics, outcomes, effect sizes)
 6. `quality-assessment.md` — risk-of-bias assessments for each included study (e.g., RoB 2, ROBINS-I, NOS)
 7. `statistical-results.md` — pooled effect estimates, confidence intervals, heterogeneity statistics, subgroup analyses, sensitivity analyses, publication bias tests
-8. `analysis.R` — the R script used for statistical analysis, to accurately describe analytic methods
+8. `analysis.py` — the Python script used for statistical analysis, to accurately describe analytic methods
 
 If any file is missing, note it explicitly and proceed with the available data. Never fabricate data or results to fill gaps.
 
@@ -89,7 +89,7 @@ Write each of the following subsections in detail:
 - **Data items** — all variables sought, including primary and secondary outcomes, time points, effect measures
 - **Risk of bias assessment** — tool used (RoB 2, ROBINS-I, NOS, etc.), domains assessed, how assessments were incorporated into synthesis
 - **Effect measures** — odds ratio, risk ratio, mean difference, standardized mean difference, etc., with justification
-- **Synthesis methods** — meta-analytic model (fixed-effect vs. random-effects), software and packages (e.g., R metafor, meta), method for pooling (inverse-variance, Mantel-Haenszel, DerSimonian-Laird, REML), handling of multi-arm trials or zero-event studies
+- **Synthesis methods** — meta-analytic model (fixed-effect vs. random-effects), software and packages (e.g., Python statsmodels, scipy, numpy), method for pooling (inverse-variance, Mantel-Haenszel, DerSimonian-Laird, REML), handling of multi-arm trials or zero-event studies
 - **Heterogeneity assessment** — Cochran Q test, I-squared, tau-squared, prediction intervals, pre-specified sources of heterogeneity
 - **Reporting biases** — funnel plot, Egger test, Peters test, trim-and-fill, or p-curve, as applicable
 - **Certainty assessment** — GRADE approach (risk of bias, inconsistency, indirectness, imprecision, publication bias), summary of findings table

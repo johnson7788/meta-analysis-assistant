@@ -92,8 +92,7 @@ Then ask whether the user wants to:
 | `data-extraction.md` | `data-extractor` | 结构化数据提取表（研究特征、结局指标、效应量） |
 | `rob-assessment.md` | `data-extractor` | 偏倚风险评估结果（基于 RoB 2 或 NOS 等工具） |
 | `statistical-results.md` | `statistician` | 统计分析结果，含合并效应量、异质性检验、亚组分析 |
-| `forest-plot.r` | `statistician` | 森林图 R 脚本 |
-| `funnel-plot.r` | `statistician` | 漏斗图 R 脚本 |
+| `analysis.py` | `statistician` | 完整 Python 分析脚本（含森林图、漏斗图） |
 | `manuscript.md` | `manuscript-writer` | 完整论文手稿（PRISMA 2020 声明格式） |
 
 ---

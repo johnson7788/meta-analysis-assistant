@@ -948,13 +948,13 @@ If ICC is not reported:
 
 | Software | Type | Key Features |
 |----------|------|-------------|
+| Python (numpy, scipy, statsmodels, matplotlib, forestplot) | Free (open source) | **本项目首选**；灵活可编程；支持 REML、DL 等估计方法；完整发表偏倚检测；与数据科学生态无缝集成 |
 | RevMan (Review Manager) | Free (Cochrane) | Standard for Cochrane reviews; forest plots; risk of bias |
 | R (metafor, meta, dmetar) | Free (open source) | Comprehensive; flexible; publication bias tests; meta-regression |
 | Stata (metan, metaan, admetan) | Commercial | Flexible; many user-written commands; funnel plots |
 | Comprehensive Meta-Analysis (CMA) | Commercial | User-friendly GUI; extensive effect size calculator |
 | OpenMeta[Analyst] | Free | GUI-based; standard meta-analysis methods |
 | JASP | Free | Bayesian and frequentist meta-analysis; GUI-based |
-| Python (PythonMeta, PyMARE) | Free (open source) | Programmable; integration with data science workflows |
 
 ---
 

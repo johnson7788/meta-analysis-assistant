@@ -74,7 +74,7 @@ protocol-designer → search-strategist → study-screener → data-extractor �
 | `search` | 设计检索策略（数据库、检索词） | search-strategist |
 | `screen` | 辅助文献筛选（PRISMA 流程图） | study-screener |
 | `extract` | 数据提取与质量评估 | data-extractor |
-| `stats` | 统计分析（生成 R 代码） | statistician |
+| `stats` | 统计分析（生成 Python 代码） | statistician |
 | `write` | 论文撰写（各章节、PRISMA 声明） | manuscript-writer |
 
 示例：
@@ -102,7 +102,7 @@ protocol-designer → search-strategist → study-screener → data-extractor �
 | search-strategist | 构建检索词，为不同数据库生成检索式（PubMed、Embase、Cochrane 等） | sonnet | `search-strategy.md` |
 | study-screener | 设计筛选表格，制定筛选决策规则，记录筛选过程和排除原因 | sonnet | `screening-log.md`、`prisma-flow-data.md` |
 | data-extractor | 设计数据提取表，选择质量评估工具（RoB 2 / NOS / QUADAS-2），引导偏倚评估 | sonnet | `data-extraction.md`、`quality-assessment.md` |
-| statistician | 选择效应量与合成模型，生成 R 代码，异质性检验，亚组分析，发表偏倚检测 | opus | `analysis.R`、`statistical-results.md` |
+| statistician | 选择效应量与合成模型，生成 Python 代码，异质性检验，亚组分析，发表偏倚检测 | opus | `analysis.py`、`statistical-results.md` |
 | manuscript-writer | 撰写结构化论文（标题、摘要、引言、方法、结果、讨论），生成 PRISMA checklist | opus | `manuscript.md`、`prisma-checklist.md` |
 
 ## 输出文件
@@ -117,7 +117,7 @@ protocol-designer → search-strategist → study-screener → data-extractor �
 | `prisma-flow-data.md` | 文献筛选 | PRISMA 流程图所需数据（各阶段文献数量） |
 | `data-extraction.md` | 数据提取 | 数据提取表（研究特征、结局指标、效应量） |
 | `quality-assessment.md` | 质量评估 | 偏倚风险评估结果和证据质量评估摘要 |
-| `analysis.R` | 统计分析 | 完整 R 分析脚本（Meta 分析、森林图、漏斗图、敏感性分析） |
+| `analysis.py` | 统计分析 | 完整 Python 分析脚本（Meta 分析、森林图、漏斗图、敏感性分析） |
 | `statistical-results.md` | 统计分析 | 统计结果解读（效应量、异质性、亚组分析、发表偏倚） |
 | `manuscript.md` | 论文撰写 | 完整论文稿件（标题、摘要、引言、方法、结果、讨论） |
 | `prisma-checklist.md` | 论文撰写 | PRISMA 2020 checklist（27 条逐项对照） |
@@ -126,24 +126,22 @@ protocol-designer → search-strategist → study-screener → data-extractor �
 
 统计分析阶段（statistician Agent）需要以下环境：
 
-- **R 语言环境**（用于运行生成的统计分析代码）
-- **R 包**：
-  - `metafor` -- Meta 分析核心计算
-  - `meta` -- Meta 分析辅助函数
-  - `dmetar` -- 额外诊断与分析工具
+- **Python 3.9+**（用于运行生成的统计分析代码）
+- **Python 包**：
+  - `numpy` -- 数值计算
+  - `pandas` -- 数据处理
+  - `scipy` -- 统计检验与分布函数
+  - `statsmodels` -- Meta 分析模型与回归分析
+  - `matplotlib` -- 绘图（漏斗图等）
   - `forestplot` -- 森林图绘制
 
-安装 R 包：
+安装 Python 包：
 
-```r
-install.packages(c("metafor", "meta", "forestplot"))
-
-# dmetar 需要从 GitHub 安装
-if (!require("remotes")) install.packages("remotes")
-remotes::install_github("MathiasHarworker/dmetar")
+```bash
+pip install numpy pandas scipy statsmodels matplotlib forestplot
 ```
 
-> 注意：如果不需要运行统计代码，仅生成 R 脚本则不需要安装以上依赖。
+> 注意：如果不需要运行统计代码，仅生成 Python 脚本则不需要安装以上依赖。
 
 ## 方法学参考
 
