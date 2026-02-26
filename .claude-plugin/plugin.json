@@ -1,0 +1,7 @@
+{
+  "name": "meta-analysis-assistant",
+  "description": "Meta 分析写作助手：通过 6 个专业 Agent 协作，帮助医学研究者完成从研究方案制定到论文撰写的 Meta 分析全流程",
+  "author": {
+    "name": "User"
+  }
+}
