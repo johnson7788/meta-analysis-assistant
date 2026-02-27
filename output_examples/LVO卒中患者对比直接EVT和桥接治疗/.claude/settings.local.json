@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude plugin --help 2>&1 || claude plugins --help 2>&1 || claude --help 2>&1 | head -40)",
+      "Bash(claude plugin install --help 2>&1)",
+      "Bash(claude plugin validate --help 2>&1)",
+      "Bash(claude plugin validate /Users/admin/.claude/plugins/meta-analysis-assistant 2>&1)",
+      "Bash(claude plugin list 2>&1)",
+      "Bash(claude plugin list --help 2>&1)",
+      "Bash(claude plugin list --json 2>&1)",
+      "Bash(claude plugin install --help 2>&1; echo \"===\"; claude plugin marketplace --help 2>&1)",
+      "Bash(claude plugin marketplace list --json 2>&1 || claude plugin marketplace list 2>&1)",
+      "Bash(claude plugin marketplace add --help 2>&1)",
+      "Bash(ln -s /Users/admin/.claude/plugins/meta-analysis-assistant /Users/admin/.claude/local-marketplace/plugins/meta-analysis-assistant && ls -la /Users/admin/.claude/local-marketplace/plugins/)",
+      "Bash(claude plugin marketplace add /Users/admin/.claude/local-marketplace 2>&1)",
+      "Bash(claude plugin marketplace add /Users/admin/.claude/local-marketplace 2>&1; echo \"EXIT: $?\")",
+      "Bash(claude plugin marketplace list 2>&1; echo \"===\"; cat /Users/admin/.claude/plugins/known_marketplaces.json)",
+      "Bash(claude plugin install meta-analysis-assistant --scope local 2>&1)",
+      "Bash(claude plugin install meta-analysis-assistant 2>&1)",
+      "Bash(cd /Users/admin/.claude/local-marketplace && git init && git add -A && git commit -m \"Initial commit: local plugin marketplace\" 2>&1)",
+      "Bash(git add -A && git commit -m \"Add marketplace manifest and meta-analysis-assistant plugin\" 2>&1)",
+      "Bash(claude plugin install meta-analysis-assistant@local-marketplace 2>&1)",
+      "Bash(claude plugin enable meta-analysis-assistant@local-marketplace 2>&1)",
+      "Bash(pip3 install scipy numpy 2>&1 | tail -3)",
+      "Bash(pip3 install --break-system-packages scipy numpy 2>&1 | tail -5)"
+    ]
+  }
+}
